@@ -1,0 +1,164 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "mount_file_id": "1IBA3kBtrXOtdJDbsZRo6_z86vZ-iHHT_",
+      "authorship_tag": "ABX9TyOEUhQRFSwWPNghB5yu5w+v",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/eunhaday/AIFFEL_quest_cr/blob/master/Python/SQUest02/Avengers.txt\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "0gP-NPHrUbm4",
+        "outputId": "0574688c-c7e8-45ac-863b-21c0fba99a1f"
+      },
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "입력하세요: The world will be his and the universe yours\n"
+          ]
+        },
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "[1, 78, 57, 21, 50, 8, 1, 507, 508]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 5
+        }
+      ],
+      "source": [
+        "\n",
+        "import re\n",
+        "\n",
+        "def preprocessing(lines): # 전처리: 소문자 변환, 특수문자 제거\n",
+        "  new_lines = \"\"\n",
+        "  for line in lines:\n",
+        "\n",
+        "    # 소문자 변환\n",
+        "    line = line.lower()\n",
+        "\n",
+        "    # 특수문자 제거\n",
+        "    line = re.sub(r'[^a-zA-Z0-9ㄱ-힣\\s]', '', line) # substitute 대체하다\n",
+        "\n",
+        "    new_lines += line\n",
+        "  return new_lines\n",
+        "\n",
+        "\n",
+        "def make_dic():\n",
+        "\n",
+        "  file_path = \"/content/drive/MyDrive/aiffel/Avengers.txt\"\n",
+        "\n",
+        "  # 텍스트 파일 불러오기\n",
+        "  f = open(file_path, 'r')\n",
+        "  lines = f.readlines() # 리스트 자료형\n",
+        "\n",
+        "  # 전처리\n",
+        "  preprocessed_lines = preprocessing(lines)\n",
+        "\n",
+        "  # 단어 분리 및 빈도수 누적 \"Hello World I am boy\" -> list\n",
+        "  dict_wordCounts = {}\n",
+        "  for line in preprocessed_lines.split('\\n'): # 문장 분리\n",
+        "    for word in line.split():\n",
+        "      if word not in dict_wordCounts: # 단어가 딕셔너리에 없을 경우\n",
+        "        dict_wordCounts[word] = 1 # 키 생성 및 값 1\n",
+        "\n",
+        "      else: # 있을 경우\n",
+        "        dict_wordCounts[word] += 1 # 누적(값 변경)\n",
+        "\n",
+        "  # 빈도수 정렬\n",
+        "  sorted_dict = dict(sorted(dict_wordCounts.items(), key=lambda item: item[1], reverse=True)) # 내림차순 정렬\n",
+        "\n",
+        "  # 빈도수가 높은 단어순으로 정수 매칭\n",
+        "  dic = {}\n",
+        "  for index, word in enumerate(sorted_dict.keys()): # enumerate는 순서 부여, index는 순서, word는 키(단어)\n",
+        "    dic[word] = index\n",
+        "\n",
+        "  #print(dic)\n",
+        "  return dic\n",
+        "\n",
+        "\n",
+        "def encoder(): # 문자열 -> 정수\n",
+        "  # 문장 입력 받기\n",
+        "  text = input(\"입력하세요: \") # The world will be his and the universe yours\n",
+        "\n",
+        "  # 입력받은 문장의 전처리(소문자 변환, 특수문자 제거)\n",
+        "  text_preprocessed = preprocessing(list(text))\n",
+        "\n",
+        "  #파일을 읽어서 전처리 및 정수로  바꾸기\n",
+        "  dic = make_dic()\n",
+        "\n",
+        "  # 입력된 단어와 파일을 읽은 단어가 같은지 비교하기\n",
+        "  result = []\n",
+        "  for word in text_preprocessed.split():\n",
+        "    if word in dic:\n",
+        "      result.append(dic[word])\n",
+        "      #print(\"[encoder] word:\", word)\n",
+        "\n",
+        "    else: # 원하는 단어가 딕셔너리에 없는 경우\n",
+        "      result.append(-1)\n",
+        "      #print(\"[encoder] word:\", -1)\n",
+        "\n",
+        "\n",
+        "  return result\n",
+        "\n",
+        "\n",
+        "encoder() #  The world will be his and the universe yours.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [],
+      "metadata": {
+        "id": "puKAss6v-O7N"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "9cVoIQ70-PoO"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "Pxf2540q-jWd"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
