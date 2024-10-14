@@ -20,7 +20,8 @@
         
 - [o]  **4. 회고를 잘 작성했나요?**
     - 도움을 받은 사실과 퀘스트에 느낀 점이 작성되어 있습니다.
-    - <img src="https://github.com/rumelay/AIFFEL_quest_crs/blob/a27bb4f7d73906eb9aee78b74d8d469facb381d9/Fluttet/SQUest11/%ED%83%80%EC%9D%B4%EB%A8%B8%EC%8B%A4%ED%96%89.png">
+    - <img width="560" alt="2567" src="https://github.com/user-attachments/assets/70099687-5097-47f7-8440-69841e75cc25">
+
         
 - [o]  **5. 코드가 간결하고 효율적인가요?**
     - 동작에 따라서 구간이 잘 나뉘어져 있고 수정하기에도 용이해 보입니다.
