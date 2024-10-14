@@ -24,7 +24,8 @@
         
 - [o]  **5. 코드가 간결하고 효율적인가요?**
     - 동작에 따라서 구간이 잘 나뉘어져 있고 수정하기에도 용이해 보입니다.
-    - <img width="433" alt="646" src="https://github.com/user-attachments/assets/2f149b37-d030-4f74-8e06-82639e01d8f8">
+    - <img width="433" alt="646" src="https://github.com/user-attachments/assets/f96bc9f2-4f83-42a7-b199-250ba36f09cd">
+
 
 
 # 회고(참고 링크 및 코드 개선)
