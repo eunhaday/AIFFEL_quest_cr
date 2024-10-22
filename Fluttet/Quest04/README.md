@@ -44,7 +44,7 @@
 
 
 ## 구현영상 
-https://github.com/rudykim2003/AIFFEL_QUEST/assets/86637005/c7f3c3ae-5a26-41ac-bfb0-9cf11bbd074b
+https://marvelapp.com/prototype/7028gff/screen/95833317
 
 
 ## 참고 학습 자료 
