@@ -28,7 +28,7 @@
 ![Wireframe_1](https://github.com/user-attachments/assets/47bc0df2-3110-4c12-913b-081c0f7374be)
 ![Wireframe_2](https://github.com/user-attachments/assets/0b59cb88-ed80-49e4-ac22-853a224fa559)
 
-## 프로토타이핑 (사용 툴 : 0000)
+## 프로토타이핑 (사용 툴 : marvelapp)
 ![image](https://github.com/user-attachments/assets/f31daa2a-c89d-453d-8976-a7e1e02dbfb2)
 
 
@@ -40,9 +40,8 @@
 5. run_test.dart - 런냥이 테스트 페이지
 
 
-
 ## 구현영상 
-https://marvelapp.com/prototype/7028gff/screen/95833317
+Fluttet/Quest04/test – main_scr.jpg - Chrome 2024-10-22 18-02-08.mp4
 
 
 ## 참고 학습 자료 
