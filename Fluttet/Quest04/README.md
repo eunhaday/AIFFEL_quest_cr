@@ -41,7 +41,7 @@
 
 
 ## 구현영상 
-[Fluttet/Quest04/test – main_scr.jpg - Chrome 2024-10-22 18-02-08.mp4](https://github.com/eunhaday/AIFFEL_quest_cr/blob/master/Fluttet/Quest04/test%20%E2%80%93%20main_scr.jpg%20-%20Chrome%202024-10-22%2018-02-08.mp4)
+https://github.com/eunhaday/AIFFEL_quest_cr/blob/master/Fluttet/Quest04/test%20%E2%80%93%20main_scr.jpg%20-%20Chrome%202024-10-22%2018-02-08.mp4
 
 
 ## 참고 학습 자료 
