@@ -24,7 +24,7 @@
 ![image](https://github.com/user-attachments/assets/0feb8b2b-a3e9-4453-b9fe-d6f850622cdb)
 
 
-## 앱 와이어프레임 (사용 툴 : 0000)
+## 앱 와이어프레임 (사용 툴 : 종이에 내용 작성한거)
 
 ![AI-UX-4-2-11_j7hKLsb original](https://github.com/rudykim2003/AIFFEL_QUEST/assets/86637005/538223ca-bc1c-4a0a-a4f6-17f27fc9a6f4)
 
