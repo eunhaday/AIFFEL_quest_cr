@@ -25,9 +25,8 @@
 
 
 ## 앱 와이어프레임 (사용 툴 : 종이에 내용 작성한거)
-
-![AI-UX-4-2-11_j7hKLsb original](https://github.com/rudykim2003/AIFFEL_QUEST/assets/86637005/538223ca-bc1c-4a0a-a4f6-17f27fc9a6f4)
-
+![Wireframe_1](https://github.com/user-attachments/assets/47bc0df2-3110-4c12-913b-081c0f7374be)
+![Wireframe_2](https://github.com/user-attachments/assets/0b59cb88-ed80-49e4-ac22-853a224fa559)
 
 ## 프로토타이핑 (사용 툴 : 0000)
 
