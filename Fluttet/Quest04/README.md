@@ -24,7 +24,7 @@
 ![image](https://github.com/user-attachments/assets/0feb8b2b-a3e9-4453-b9fe-d6f850622cdb)
 
 
-## 앱 와이어프레임 (사용 툴 : 종이에 내용 작성한거)
+## 앱 와이어프레임 (사용 툴 : 파워포인터)
 ![Wireframe_1](https://github.com/user-attachments/assets/47bc0df2-3110-4c12-913b-081c0f7374be)
 ![Wireframe_2](https://github.com/user-attachments/assets/0b59cb88-ed80-49e4-ac22-853a224fa559)
 
