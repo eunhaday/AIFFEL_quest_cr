@@ -29,9 +29,7 @@
 ![Wireframe_2](https://github.com/user-attachments/assets/0b59cb88-ed80-49e4-ac22-853a224fa559)
 
 ## 프로토타이핑 (사용 툴 : 0000)
-
-![AI-UX-4-2-13 original](https://github.com/rudykim2003/AIFFEL_QUEST/assets/86637005/276a76a9-dadc-47c0-a9d3-169e7c033693)
-
+![image](https://github.com/user-attachments/assets/f31daa2a-c89d-453d-8976-a7e1e02dbfb2)
 
 
 ## 페이지 구현
