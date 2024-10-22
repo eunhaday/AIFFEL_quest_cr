@@ -21,6 +21,7 @@
   
 
 ## 앱 구조도
+![image](https://github.com/user-attachments/assets/0feb8b2b-a3e9-4453-b9fe-d6f850622cdb)
 
 
 ## 앱 와이어프레임 (사용 툴 : 0000)
