@@ -58,6 +58,7 @@
 
 ## 구현영상 
 https://github.com/eunhaday/AIFFEL_quest_cr/blob/master/Fluttet/Quest04/%EC%BF%A0%ED%8C%A1%EC%95%B1%EC%8B%A4%ED%96%89.mp4
+필요한파일들 압축한 파일 : coupang_app.zip
 
 ## 참고 학습 자료 
 - **아이콘은 무료다운로드후 이용(월이용액 아이콘)**   
