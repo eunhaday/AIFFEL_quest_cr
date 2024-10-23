@@ -16,9 +16,6 @@
 
   - 장보러 가기 힘들거나 시간이 애매한 경우에도 쇼핑이 가능하고 다음날 받아보기 원하는 장본인들의 한달소비 금액을 같이 보여주기
 
-- **아이콘은 무료다운로드후 이용**   
-  - 출처 : <a href="https://www.flaticon.com/kr/free-icons/" title="금액 아이콘">금액 아이콘 제작자: Vectors Tank - Flaticon</a>
-  
 
 ## 앱 구조도
 ![image](https://github.com/user-attachments/assets/0feb8b2b-a3e9-4453-b9fe-d6f850622cdb)
@@ -60,12 +57,15 @@
 
 
 ## 구현영상 
-
+https://github.com/eunhaday/AIFFEL_quest_cr/blob/master/Fluttet/Quest04/%EC%BF%A0%ED%8C%A1%EC%95%B1%EC%8B%A4%ED%96%89.mp4
 
 ## 참고 학습 자료 
-
+- **아이콘은 무료다운로드후 이용(월이용액 아이콘)**   
+  - 출처 : <a href="https://www.flaticon.com/kr/free-icons/" title="금액 아이콘">금액 아이콘 제작자: Vectors Tank - Flaticon</a>
 
 ## 회고
-쿠팡앱의 모바일앱 화면을 캡쳐후, 대략의 앱구조도를 그리고 앱와이어 프레임을 배치하고 수정, 보완하는 과정을 종이에 그리고
+쿠팡앱의 모바일앱 화면을 캡쳐후, 대략의 앱구조도를 그리고 앱와이어 프레임을 배치하고 수정, 보완하는 과정을 종이에 그리고(추후 ppt로 작업함)
 그림의 화면에 올리고 실제 프로토타입은 마블앱으로 구현해보고 그기능을 dart언어로 다시 구현하는 작업을 해봤다.
+화면을 자르고 붙이면서 위치를 잡고 간단히 화면을 조작하는 작업이지만 시간이 많이 걸렸다.
+계속 좋은 sample파일을 보면서 기본기능을 눈에 익히고 손에 익혀야 겠다.
 
