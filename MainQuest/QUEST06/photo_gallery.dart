@@ -1,6 +1,9 @@
 import 'dart:io';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
+
 
 /*============================================================
 * 갤러리앱의 기능설명
@@ -21,7 +24,7 @@ import 'package:image_picker/image_picker.dart';
 *
 * - 기능은 폴더추가, 폴더삭제, 이미지업로드, 카메라, 자료분류 기능을 추가함
 *   그중 구현이 추가로 필요한건 이미지업로드, 카메라, 자료분류임
-*
+* 
 * - 보완필요기능 정리
 *  -> 폴더생성시 New Folder_x 의 형태로 만드는 기능 추가필요
 *  -> 사진정보의 ID의 경우는 최종 ID를 찾아서 id+1의 값으로 생성필요
@@ -83,6 +86,7 @@ class FolderListPage extends StatefulWidget {
 
 //실제 처리되는 사진갤러리 폴더리스트 정보
 class _FolderListPageState extends State<FolderListPage> {
+
   // Sample folders and photos
   final List<Folder> folders = [
     Folder(name: 'Animals', icon: Icons.pets, photos: [ //Animals 폴더
@@ -122,7 +126,11 @@ class _FolderListPageState extends State<FolderListPage> {
     ]),
   ];
 
+  String result = ""; //vgg16모델 호출결과 받는 변수
+  TextEditingController urlController = TextEditingController(); // URL을 입력 받는 컨트롤러(자료분류 기능관련)
+
   Folder? selectedFolder; //선택된 폴더를 저장하는 변수, 추가된 폴더를 수정하거나 삭제시 이용
+  bool _isTextFieldVisible = false;  //자료분류버튼 클릭시 edit버튼 visible처리를 하기 위하여
   
   //폴더추가시 빈폴더로 이름은 New Folder로 해서 생성됨, Folder class의 내용만으로 일단 생성함
   void _addFolder() {
@@ -238,6 +246,36 @@ class _FolderListPageState extends State<FolderListPage> {
     );
   }
 
+  //서버에 있는 참조할 API주소를 등록하고, vgg16모델을 이용하여 특정폴더의
+  // 이미지 사진이 무엇인지 라벨과 정확도값을 화면에 표시하는 자료분류기 기능
+  Future<void> fetchData() async {
+    try {
+      final enteredUrl = urlController.text; // 입력된 URL 가져오기
+      final response = await http.get(
+        Uri.parse(enteredUrl + "sample"), // 입력된 URL 사용
+        headers: {
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': '69420',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        setState(() {
+          result = "예측라벨: ${data['predicted_label']}\n예측_점수: ${data['prediction_score']})";
+        });
+      } else {
+        setState(() {
+          result = "데이터를 가져오지 못했습니다. 상태코드(Status Code): ${response.statusCode}";
+        });
+      }
+    } catch (e) {
+      setState(() {
+        result = "Error: $e";
+      });
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -254,67 +292,92 @@ class _FolderListPageState extends State<FolderListPage> {
         ),
       ),
       body: Row(
-        children: [
-          Expanded(
-            flex: 6,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ListView.builder(
-                itemCount: folders.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    leading: Icon(folders[index].icon),
-                    title: Text(folders[index].name),
+          children: [
+            Expanded(
+              flex: 6,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: folders.length,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              leading: Icon(folders[index].icon),
+                              title: Text(folders[index].name),
 
-                    //listview의 선택된 폴더가 selectedFolder로 저장한 변수와 같을경우
-                    //selected=true, 아니면 selected=false로 값을 가짐
-                    selected: selectedFolder == folders[index],
+                              //listview의 선택된 폴더가 selectedFolder로 저장한 변수와 같을경우
+                              //selected=true, 아니면 selected=false로 값을 가짐
+                              selected: selectedFolder == folders[index],
 
-                    onTap: () { //해당 폴더를 눌렀을때
-                      setState(() {
-                        selectedFolder = folders[index]; //선택된 폴더의 index값을 selectedFolder 변수에 세팅
-                      });
+                              onTap: () { //해당 폴더를 눌렀을때
+                                setState(() {
+                                  selectedFolder = folders[index]; //선택된 폴더의 index값을 selectedFolder 변수에 세팅
+                                });
 
-                      Navigator.push( //PhotoListPage 화면호출
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PhotoListPage(folder: folders[index]),
+                                Navigator.push( //PhotoListPage 화면호출
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PhotoListPage(folder: folders[index]),
+                                  ),
+                                );
+                              },
+                              onLongPress: () { //위젯을 길게 누르는 경우 수정하는 상태로 인지하고 폴더명을 변경함
+                                _editFolderName(folders[index]);
+                              },
+                            );
+                          },
                         ),
-                      );
-                    },
-                    onLongPress: () { //위젯을 길게 누르는 경우 수정하는 상태로 인지하고 폴더명을 변경함
-                      _editFolderName(folders[index]);
-                    },
-                  );
-                },
+                      ),
+                      //
+                      if (_isTextFieldVisible) ...[
+                        SizedBox(height: 5),
+                        TextField(
+                          controller: urlController, // URL 입력을 위한 TextField
+                          decoration: InputDecoration(labelText: "URL 입력"), // 입력 필드의 라벨
+                        ),
+                        ElevatedButton(
+                          onPressed: fetchData,
+                          child: Text("데이터 가져오기"),
+                        ),
+                        SizedBox(height: 8),
+                        Text(result, style: TextStyle(fontSize: 15),),
+                      ],
+                    ],
+                ),
               ),
             ),
-          ),
-          VerticalDivider(width: 1), // Optional divider
-          Expanded(
-            flex: 1,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(height: 20),
-                IconButton(icon: Icon(Icons.create_new_folder), tooltip: '[폴더추가], 좌측의 폴더에 신규로 추가됩니다.',
-                  onPressed: _addFolder, ),
-                IconButton(icon: Icon(Icons.folder_delete), tooltip: '[폴더삭제], 좌측의 선택된 폴더 및 포함된 사진전부를 삭제합니다.',
+            VerticalDivider(width: 1), // Optional divider
+            Expanded(
+              flex: 1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(height: 20),
+                  IconButton(icon: Icon(Icons.create_new_folder), tooltip: '[폴더추가], 좌측의 폴더에 신규로 추가됩니다.',
+                    onPressed: _addFolder, ),
+                  IconButton(icon: Icon(Icons.folder_delete), tooltip: '[폴더삭제], 좌측의 선택된 폴더 및 포함된 사진전부를 삭제합니다.',
                     onPressed: _deleteFolder, ),
-                IconButton(icon: Icon(Icons.drive_folder_upload), tooltip: '[파일업로드], 추가를 원하는 사진을 폴더에 추가할수 있습니다.',
-                  onPressed: ()  {}),
-                IconButton(icon: Icon(Icons.linked_camera), tooltip: '[사진추가], 카메라로 찍은 사진을 카메라폴더에 추가합니다.',
-                    onPressed: () {
-                    }),
-                IconButton(icon: Icon(Icons.manage_search), tooltip: '[사진분류], 카메라폴더의 사진을 모델을 통해서 기존폴더나 신규폴더에 이동하여 추가합니다.',
-                    onPressed: () {
-
-                    }),
-              ],
+                  IconButton(icon: Icon(Icons.drive_folder_upload), tooltip: '[파일업로드], 추가를 원하는 사진을 폴더에 추가할수 있습니다.',
+                      onPressed: ()  {}),
+                  IconButton(icon: Icon(Icons.linked_camera), tooltip: '[사진추가], 카메라로 찍은 사진을 카메라폴더에 추가합니다.',
+                      onPressed: () {
+                      }),
+                  IconButton(icon: Icon(Icons.manage_search), tooltip: '[사진분류], 카메라폴더의 사진을 모델을 통해서 기존폴더나 신규폴더에 이동하여 추가합니다.',
+                      onPressed: () {
+                        setState(() {
+                          _isTextFieldVisible = !_isTextFieldVisible;
+                          result = "";
+                          urlController.text = "";
+                        });
+                      },
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
     );
   }
 }
